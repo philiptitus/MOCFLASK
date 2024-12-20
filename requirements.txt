@@ -1,0 +1,13 @@
+Flask
+Flask-Cors
+Flask-RESTful
+Flask-SQLAlchemy
+Flask-Migrate
+google-generativeai
+requests
+Pillow
+pydot
+python-dotenv
+google
+google-ai-generativelanguage
+google.generativeai
