@@ -1,0 +1,292 @@
+body {
+  font-family: sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  color: #333;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#response-container {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.success {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+}
+
+.error {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+.hidden {
+  display: none;
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #333;
+  border-color: #4CAF50 transparent transparent transparent;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+#form-container, #response-container {
+  margin-bottom: 20px;
+}
+
+.case-container {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.case-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.option {
+  margin-bottom: 5px;
+}
+
+.submit-button {
+  margin-top: 20px;
+}
+
+
+/* ... existing styles ... */
+
+.result-summary {
+  margin-bottom: 1em;
+  text-align: center;
+  font-weight: bold;
+}
+
+.result-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+  grid-gap: 1em;
+}
+
+.case-result {
+  border: 1px solid #ccc;
+  padding: 1em;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.success {
+background-color: lightgreen;
+color: darkgreen;
+border: 2px solid darkgreen;
+}
+
+.error {
+background-color: lightcoral;
+color: darkred;
+border: 2px solid darkred;
+}
+
+.submit-button {
+background-color: #4CAF50;
+border: none;
+color: white;
+padding: 10px 20px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+border-radius: 5px;
+}
+
+.submit-button:hover {
+  background-color: #3e8e41;
+}
+
+
+#newGameButton {
+  display: block;
+  margin: 1em auto;
+  padding: 0.5em 1em;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#newGameButton:hover {
+background-color: #3e8e41;
+}
+
+
+/* ... your existing styles ... */
+
+/* Dropdown Styles */
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  appearance: none; /* Remove default arrow */
+  background-color: white; /* Set background color */
+}
+
+select:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle focus effect */
+}
+
+
+select::-ms-expand {
+  display: none; /* Remove default arrow in IE/Edge */
+}
+
+/* Custom arrow for select (using pseudo-elements) */
+select::after {
+  content: "\279C"; /* Unicode for a down arrow */
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Prevent arrow from interfering with clicks */
+  color: #555;
+}
+
+/*Improved spacing*/
+label {
+margin-bottom: 8px;
+}
+
+select, input {
+margin-bottom: 15px;
+}
+
+/*Add a little bit of shadow to the form container*/
+#form-container {
+box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+padding: 20px;
+border-radius: 5px;
+}
+
+
+.error {
+  background-color: lightcoral;
+  color: darkred;
+  border: 2px solid darkred;
+  padding: 1em;
+  border-radius: 5px;
+}
+
+#tryAgainButton {
+  display: block;
+  margin: 1em auto;
+  padding: 0.5em 1em;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#tryAgainButton:hover {
+  background-color: #3e8e41;
+}

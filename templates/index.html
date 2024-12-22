@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MOC API DEMO</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='files/css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>MOC API DEMO</h1>
+        <h6>*Note the default subject of "relatives, neighbors, acquaintances" is being used.
+        </h6>
+        <h6 style="color: red;">*Please click on try again incase of any errors.</h6>
+        <div id="form-container">
+            <form id="generateForm">
+                <label for="language">Language:</label>
+                <select id="language" name="language" required>
+                    <option value="">Select Language</option>
+                    <option value="English">English</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="French">French</option>
+                    <option value="Mandarin Chinese">Mandarin Chinese</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="Arabic">Arabic</option>
+                    <option value="Bengali">Bengali</option>
+                    <option value="Russian">Russian</option>
+                    <option value="Portuguese">Portuguese</option>
+                    <option value="Urdu">Urdu</option>
+                    <option value="German">German</option>
+                    <option value="Japanese">Japanese</option>
+                    <option value="Swahili">Swahili</option>
+                    <option value="Marathi">Marathi</option>
+                    <option value="Telugu">Telugu</option>
+                    <option value="Tamil">Tamil</option>
+                    <option value="Vietnamese">Vietnamese</option>
+                    <option value="Korean">Korean</option>
+                    <option value="Turkish">Turkish</option>
+                </select>
+
+                <label for="sex">Sex:</label>
+                <select id="sex" name="sex" required>
+                    <option value="">Select Sex</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+
+                <label for="age">Age:</label>
+                <select id="age" name="age" required>
+                    <option value="">Select Age</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                </select>
+
+                <button type="submit">Generate Cases</button>
+            </form>
+        </div>
+        <div id="loading-spinner" class="hidden">
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>
+        <div id="response-container" class="hidden">
+            <form id="caseForm">
+                <!-- Cases will be injected here -->
+                <button type="submit" class="submit-button">Submit Answers</button>
+            </form>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='files/js/script.js') }}"></script>
+</body>
+</html>

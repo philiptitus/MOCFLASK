@@ -15,6 +15,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 # Load environment variables
 
+import uuid  # Import uuid for unique ID generation
 
 
 
@@ -80,10 +81,10 @@ if not GENAI_API_KEY:
 genai.configure(api_key=GENAI_API_KEY)
 
 # Define the base directory for the Flask app
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent
 
 # Load prompts from JSON file
-PROMPTS_FILE = Path("./prompts.json") # Relative to utils.py
+PROMPTS_FILE = BASE_DIR / "prompts.json"
 if not PROMPTS_FILE.exists():
     raise FileNotFoundError(f"Prompts file not found at {PROMPTS_FILE}")
 
@@ -137,69 +138,50 @@ def extract_list(code: str) -> str:
         logger(f"Problematic code snippet: {code}")
         return None
 
-# Generate cases for different scenarios
-def gen_cases(language: str, sex: str, age: int):
+def gen_cases(language: str, sex: str, age: int, output_dir: Path):
     logger("Starting to generate cases...")
-    engine = sqlalchemy.create_engine('sqlite:///./cases.db')
-    create_db(engine)  # Creates the tables
-    Session = sessionmaker(bind=engine)  # Create a sessionmaker
-    session = Session()  # Create a session object
+    all_cases = []
+    for i, option in enumerate(prompts['roles'], start=1):
+        prompt = f"""{prompts['cases']} Respond in {language}. The content should be appropriate for a {sex} child aged {age}."""
+        try:
+            response = get_response_gemini(prompt)
+            if not response:
+                continue
+            logger(f"Raw response for option {i}: {response}")
+            cleaned_response = clean_response(response)
+            logger(f"Cleaned response for option {i}: {cleaned_response[:50]}...")
+            list_content = extract_list(cleaned_response)
+            logger(f"Extracted list for option {i}: {list_content[:50]}...")
+            parsed = json.loads(list_content)
+            logger(f"Successfully parsed response for option {i}...")
 
-    try:
-        for i, option in enumerate(prompts['roles'], start=1):
-            prompt = f"""{prompts['cases']} Respond in {language}. The content should be appropriate for a {sex} child aged {age}."""
-            try:
-                response = get_response_gemini(prompt)
-                if not response:
-                    continue
-                logger(f"Raw response for option {i}: {response}")
-                cleaned_response = clean_response(response)
-                logger(f"Cleaned response for option {i}: {cleaned_response[:50]}...")
-                list_content = extract_list(cleaned_response)
-                logger(f"Extracted list for option {i}: {list_content[:50]}...")
-                try:
-                    parsed = json.loads(list_content)
-                    logger(f"Successfully parsed response for option {i}...")
+            option_data = {'option_id': str(uuid.uuid4()), 'option': option, 'cases': []} # Generate option ID
 
-                    # Database interaction here
-                    top_level_option = TopLevelOption(text=option)
-                    session.add(top_level_option)
-                    session.flush()  # Get the ID of the top_level_option
+            for j, case_data_dict in enumerate(parsed):
+                case_id = str(uuid.uuid4()) # Generate case ID
+                case_data = {'case_id': case_id, 'case': case_data_dict['case'], 'optimal': case_data_dict['optimal'], 'options': []}
 
-                    new_case = Case(top_level_option_id=top_level_option.id, text=json.dumps(parsed),
-                                    optimal_option=i)  # Assuming optimal_option is the index
-                    session.add(new_case)
-                    session.flush()
+                for k, option_data_dict in enumerate(case_data_dict['options']):
+                    option_id = str(uuid.uuid4()) #Generate option ID
+                    option_item = {'option_id': option_id, 'number': option_data_dict['number'], 'option': option_data_dict['option'],
+                                    'health': option_data_dict['health'], 'wealth': option_data_dict['wealth'], 'relationships': option_data_dict['relationships'],
+                                    'happiness': option_data_dict['happiness'], 'knowledge': option_data_dict['knowledge'], 'karma': option_data_dict['karma'],
+                                    'time_management': option_data_dict['time_management'], 'environmental_impact': option_data_dict['environmental_impact'],
+                                    'personal_growth': option_data_dict['personal_growth'], 'social_responsibility': option_data_dict['social_responsibility']}
+                    case_data['options'].append(option_item)
 
-                    for j, item in enumerate(parsed):
-                        case_option = CaseOption(case_id=new_case.id, number=j + 1, text=str(item),
-                                                 health=0, wealth=0, relationships=0, happiness=0, knowledge=0,
-                                                 karma=0, time_management=0, environmental_impact=0,
-                                                 personal_growth=0, social_responsibility=0)
-                        session.add(case_option)
-                    session.commit()
-                    logger(f"Saved case {i} to database...")
+                option_data['cases'].append(case_data)
 
-                except json.JSONDecodeError as e:
-                    logger(f"Error parsing JSON response for option {i}: {e}")
-                    session.rollback()  # Rollback transaction on error
-                    continue  # Skip to the next iteration
-                except Exception as e:
-                    logger(f"Error saving case {i} to database: {e}")
-                    session.rollback()  # Rollback transaction on error
-                    continue  # Skip to the next iteration
-            except Exception as err:
-                logger(f"Error processing case {i}: {err}")
-                session.rollback()  # Rollback transaction on error
-                continue  # Skip to the next iteration
-    except Exception as err:
-        logger(f"Error processing cases: {err}")
-        session.rollback()  # Rollback transaction on error
-    finally:
-        session.close()  # Close the session in the finally block
+            all_cases.append(option_data)
+            case_file = output_dir / f"option_{i}.json"
+            with open(case_file, 'w', encoding='utf-8') as f:
+                json.dump(option_data, f, indent=4)
+            logger(f"Saved case {i} to {case_file}")
 
-
-
+        except Exception as e:
+            logger(f"Error processing case {i}: {e}")
+            return None
+    return all_cases
 
 
 # Generate images for cases
