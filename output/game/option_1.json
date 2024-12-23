@@ -1,0 +1,117 @@
+{
+    "option_id": "91f8422a-c93f-4fda-a4a9-5d6bb34c871b",
+    "option": "relatives, neighbors, acquaintances",
+    "cases": [
+        {
+            "case_id": "a81d43da-38a4-4205-af35-7dd2b3825073",
+            "case": "Est\u00e1s en el parque y una ni\u00f1a est\u00e1 llorando porque se cay\u00f3. \u00bfQu\u00e9 haces?",
+            "optimal": 2,
+            "options": [
+                {
+                    "option_id": "991beb49-935a-4bf9-875e-11cc18cb5228",
+                    "number": 1,
+                    "option": "Te quedas jugando sin hacer nada.",
+                    "health": 2,
+                    "wealth": 0,
+                    "relationships": 1,
+                    "happiness": 2,
+                    "knowledge": 0,
+                    "karma": 1,
+                    "time_management": 3,
+                    "environmental_impact": 0,
+                    "personal_growth": 1,
+                    "social_responsibility": 1
+                },
+                {
+                    "option_id": "2d540924-7c89-45db-bc3a-23c81e49e0ca",
+                    "number": 2,
+                    "option": "Le preguntas a la ni\u00f1a si est\u00e1 bien y buscas a un adulto para que la ayude.",
+                    "health": 5,
+                    "wealth": 0,
+                    "relationships": 5,
+                    "happiness": 5,
+                    "knowledge": 2,
+                    "karma": 5,
+                    "time_management": 4,
+                    "environmental_impact": 0,
+                    "personal_growth": 5,
+                    "social_responsibility": 5
+                }
+            ]
+        },
+        {
+            "case_id": "d4feae7d-d4eb-4659-ac6a-6790bc5777d5",
+            "case": "Est\u00e1s en clase y tu amiga te pide que le pases la tarea que olvid\u00f3 hacer. \u00bfQu\u00e9 haces?",
+            "optimal": 2,
+            "options": [
+                {
+                    "option_id": "ab7f975f-76c5-4639-9847-0fd01811839d",
+                    "number": 1,
+                    "option": "Le pasas la tarea a tu amiga para que la copie.",
+                    "health": 2,
+                    "wealth": 0,
+                    "relationships": 3,
+                    "happiness": 3,
+                    "knowledge": -2,
+                    "karma": -1,
+                    "time_management": 5,
+                    "environmental_impact": 0,
+                    "personal_growth": -1,
+                    "social_responsibility": -2
+                },
+                {
+                    "option_id": "020aa20f-9237-4e31-bf54-4669e1ed6e0e",
+                    "number": 2,
+                    "option": "Le dices a tu amiga que no puedes pasarle la tarea porque no es correcto, pero le ofreces ayudarla a entender la lecci\u00f3n despu\u00e9s de clase.",
+                    "health": 5,
+                    "wealth": 0,
+                    "relationships": 5,
+                    "happiness": 4,
+                    "knowledge": 5,
+                    "karma": 4,
+                    "time_management": 3,
+                    "environmental_impact": 0,
+                    "personal_growth": 5,
+                    "social_responsibility": 3
+                }
+            ]
+        },
+        {
+            "case_id": "722a9a76-c4f0-476b-b431-e1ba0635f763",
+            "case": "Est\u00e1s en la tienda y quieres un dulce, pero tus padres dijeron que no puedes comer dulces antes de la cena. \u00bfQu\u00e9 haces?",
+            "optimal": 2,
+            "options": [
+                {
+                    "option_id": "792c0864-9094-46e4-adcc-955391bac74b",
+                    "number": 1,
+                    "option": "Le pides a tus padres que te compren el dulce, haciendo un berrinche hasta que digan que s\u00ed.",
+                    "health": 1,
+                    "wealth": -1,
+                    "relationships": -2,
+                    "happiness": -2,
+                    "knowledge": 0,
+                    "karma": -1,
+                    "time_management": -1,
+                    "environmental_impact": 0,
+                    "personal_growth": -2,
+                    "social_responsibility": -1
+                },
+                {
+                    "option_id": "7e353d6a-71a5-4279-84ba-3366474c0d54",
+                    "number": 2,
+                    "option": "Aceptas que no puedes comer dulces antes de la cena y le pides a tus padres que te compren una fruta.",
+                    "health": 5,
+                    "wealth": 1,
+                    "relationships": 4,
+                    "happiness": 4,
+                    "knowledge": 2,
+                    "karma": 3,
+                    "time_management": 5,
+                    "environmental_impact": 2,
+                    "personal_growth": 4,
+                    "social_responsibility": 2
+                }
+            ]
+        }
+    ]
+}

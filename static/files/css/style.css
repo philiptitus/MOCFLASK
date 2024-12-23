@@ -9,6 +9,12 @@ body {
 }
 
 .container {
+  width: 90%;  /* Occupy 90% of the viewport width */
+  margin: 0 auto; /* Center the container */
+}
+
+
+.container {
   background-color: white;
   padding: 20px;
   border-radius: 8px;
@@ -290,3 +296,5 @@ border-radius: 5px;
 #tryAgainButton:hover {
   background-color: #3e8e41;
 }
+
+

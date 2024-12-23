@@ -1,15 +1,104 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOC API DEMO</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='files/css/style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+        h6 {
+            font-size: 1em;
+            margin: 0.5em 0;
+        }
+        #form-container {
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label {
+            margin: 10px 0 5px;
+        }
+        select {
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 300px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        #loading-spinner {
+            margin: 20px 0;
+        }
+        .lds-ring {
+            display: inline-block;
+            position: relative;
+            width: 64px;
+            height: 64px;
+        }
+        .lds-ring div {
+            box-sizing: border-box;
+            display: block;
+            position: absolute;
+            width: 51px;
+            height: 51px;
+            margin: 6px;
+            border: 6px solid #000;
+            border-radius: 50%;
+            animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            border-color: #000 transparent transparent transparent;
+        }
+        .lds-ring div:nth-child(1) {
+            animation-delay: -0.45s;
+        }
+        .lds-ring div:nth-child(2) {
+            animation-delay: -0.3s;
+        }
+        .lds-ring div:nth-child(3) {
+            animation-delay: -0.15s;
+        }
+        @keyframes lds-ring {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .hidden {
+            display: none;
+        }
+        .submit-button {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>MOC API DEMO</h1>
-        <h6>*Note the default subject of "relatives, neighbors, acquaintances" is being used.
-        </h6>
-        <h6 style="color: red;">*Please click on try again incase of any errors.</h6>
+        <h6>*Note the default subject of "relatives, neighbors, acquaintances" is being used.</h6>
+        <h6 style="color: red;">*Please click on try again in case of any errors.</h6>
         <div id="form-container">
             <form id="generateForm">
                 <label for="language">Language:</label>
@@ -74,7 +163,7 @@
         <div id="response-container" class="hidden">
             <form id="caseForm">
                 <!-- Cases will be injected here -->
-                <button type="submit" class="submit-button">Submit Answers</button>
+                <!--<button type="submit" class="submit-button">Submit Answers</button>-->
             </form>
         </div>
     </div>

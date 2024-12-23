@@ -63,26 +63,55 @@ async function submitAnswers(answers) {
     responseContainer.classList.remove('error');
 
     try {
-        const response = await fetch('/submit_answers', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ answers: answers })
-        });
+        // Simulate a successful response
+        const data = {
+            total_score: calculateTotalScore(answers), // You'll need to implement this function
+            max_total_score: calculateMaxTotalScore(answers), // You'll need to implement this function
+            results: answers.map(answer => ({
+                case_id: answer.case_id,
+                score: calculateScoreForAnswer(answer), // You'll need to implement this function
+                max_score: calculateMaxScoreForAnswer(answer) // You'll need to implement this function
+            }))
+        };
 
-        if (!response.ok) {
-            displayError(await response.json());
-        } else {
-            const data = await response.json();
-            displayResults(data);
-            responseContainer.classList.add('success');
-        }
+        displayResults(data);
+        responseContainer.classList.add('success');
+
+
     } catch (error) {
-        displayError({ error: error.message });
+        // This would handle errors in your score calculation logic, if any.
+        displayError({ error: error.message }); 
     } finally {
         loadingSpinner.classList.add('hidden');
         responseContainer.classList.remove('hidden');
     }
 }
+
+// Placeholder functions - you'll need to define the actual scoring logic.
+function calculateTotalScore(answers) {
+    // Replace with your actual score calculation
+    return answers.length * 5; // Example: 5 points per answer
+}
+
+
+function calculateMaxTotalScore(answers) {
+    // Replace with your actual max score calculation
+    return answers.length * 10; // Example: 10 max points per answer
+}
+
+function calculateScoreForAnswer(answer) {
+    // Replace with your actual score calculation for a single answer
+    return Math.floor(Math.random() * 6); // Example: random score between 0 and 5
+}
+
+function calculateMaxScoreForAnswer(answer) {
+     // Replace with your actual max score calculation for a single answer
+    return 10; // Example: 10 max points per answer
+}
+
+
+
+
 
 function displayResults(data) {
     responseContainer.innerHTML = `

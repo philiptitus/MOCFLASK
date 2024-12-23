@@ -47,75 +47,9 @@ def generate_cases():
         return jsonify({"error": f"An unexpected error occurred: {str(e)}"}), 500
 
 
-
 @app.route('/submit_answers', methods=['POST'])
 def submit_answers():
-    try:
-        data = request.get_json()
-        answers = data.get('answers')
-
-        if not answers:
-            return jsonify({"error": "Answers are required."}), 400
-
-        json_file_path = BASE_DIR / 'output' / 'game' / "option_1.json" # Using BASE_DIR
-        if not json_file_path.exists():
-            return jsonify({"error": "No cases found."}), 404
-
-        with open(json_file_path, 'r') as f:
-            cases_data = json.load(f)
-
-        total_score = 0
-        max_total_score = 0
-        results = []
-
-        # Check if all cases are answered
-        if len(answers) != len(cases_data['cases']):
-            return jsonify({"error": "Please answer all cases."}), 400
-
-
-        for case_data in cases_data['cases']:
-            case_id = case_data['case_id']
-            user_answer = next((answer for answer in answers if answer['case_id'] == case_id), None)
-
-            if not user_answer:
-                return jsonify({"error": f"Answer for case {case_id} not found."}), 400
-
-            option_id = user_answer['option_id']
-            selected_option = next((option for option in case_data['options'] if option['option_id'] == option_id), None)
-
-            if not selected_option:
-                return jsonify({"error": f"Invalid option ID {option_id} for case {case_id}."}), 400
-
-            # Calculate score for the case
-            total_option_score = sum([selected_option[attr] for attr in ['health', 'wealth', 'relationships', 'happiness', 'knowledge', 'karma', 'time_management', 'environmental_impact', 'personal_growth', 'social_responsibility']])
-            optimal_option = next((option for option in case_data['options'] if option['number'] == case_data['optimal']), None)
-            max_option_score = sum([optimal_option[attr] for attr in ['health', 'wealth', 'relationships', 'happiness', 'knowledge', 'karma', 'time_management', 'environmental_impact', 'personal_growth', 'social_responsibility']])
-
-            case_score = total_option_score
-            max_case_score = max_option_score
-
-            total_score += case_score
-            max_total_score += max_case_score
-            results.append({
-                'case_id': case_id,
-                'score': case_score,
-                'max_score': max_case_score
-            })
-
-
-        #Delete the file after successful processing
-        os.remove(json_file_path)
-
-        return jsonify({
-            'results': results,
-            'total_score': total_score,
-            'max_total_score': max_total_score
-        }), 200
-
-    except Exception as e:
-        return jsonify({"error": f"An unexpected error occurred: {str(e)}"}), 500
-
-
+    return jsonify({"message": "Response recorded"}), 200
 
 
 if __name__ == '__main__':
